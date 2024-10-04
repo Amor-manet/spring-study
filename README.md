@@ -21,7 +21,8 @@ Let the world know the achievements of your great celebrity, build points, and k
     - [PointsAwardCriteria](#pointsawardcriteria)
     - [PointsLog](#Pointslog)
 
-## 🖼️ 소개
+
+## 🖼️ 소개 
 
 이 mini  프로젝트는 유명인의 다양한 업적을 체계적으로 관리하고, 업적에 따라 포인트를 부여하며, 이를 통해 유명인의 랭킹을 산출하는 것을 목표로 합니다. 스키마(?) 통해 유명인과 그들의 업적, 분야, 포인트 부여 내역 등을 효율적으로 저장하고 관리할 수 있으며, 그들의 팬들에게 자긍심을 줍니다.
 
