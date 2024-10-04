@@ -218,7 +218,6 @@ Temporary Items
 *.icloud
 
 ### Gradle ###
-.gradle
 **/build/
 !src/**/build/
 
@@ -236,9 +235,7 @@ gradle-app.setting
 
 # Eclipse Gradle plugin generated files
 # Eclipse Core
-.project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
 
 ### Gradle Patch ###
 # Java heap dump
