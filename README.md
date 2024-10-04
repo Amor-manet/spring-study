@@ -3,7 +3,8 @@
 # 🔥본격🔥  최애 배틀 ⚔️
 
  제가 만든 서비스는 유명인의 업적을 수치화 시켜 랭킹으로 보여주는 서비스입니다.
-당신의 그 잘난 유명인의 업적을 세상에 알리고 포인트를 쌓아 순위권 안에 유지시켜주세요. 😰
+당신의 그 잘난 유명인의 업적을 세상에 알리고 포인트를 쌓아 순위권 안에 유지시켜주세요. 
+ 지금도 경쟁자가 쫓아오고 있습니다~~ 😰
 
 Service I made is a service that quantify the achievements of celebrities and shows them as a ranking.
 Let the world know the achievements of your great celebrity, build points, and keep them in the ranking.
