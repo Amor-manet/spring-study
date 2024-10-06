@@ -1,0 +1,20 @@
+spring:
+  jpa:
+    database: h2  #use db
+    open-in-view: false
+    show-sql: true # show sql on log
+    hibernate: #JPA create table
+      ddl-auto: create #crete use only test
+    properties:
+      hibernate:
+        format_sql: false #sql log looks pretty
+        # default_batch_fetch_size: 10
+    datasource:
+      url: jdbc:h2:mem:portfolio #db url
+      username: sa #id
+      password: #pw
+      driver-class-name: org.h2.Driver #using drive name
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
