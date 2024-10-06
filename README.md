@@ -144,3 +144,5 @@ CREATE TABLE PointsLog (
 ## 💰나중에 진짜 서비스로 만들어보고싶다.
 
 입니!다!!
+
+![ERD](./images/mermaid.png)
