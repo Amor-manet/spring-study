@@ -1,7 +1,7 @@
 ![](https://velog.velcdn.com/images/amormanet/post/6baabf1f-35e6-4956-85c5-6b43ea110a28/image.webp)
 
 첫번째 개인 웹 프로젝트
-# 🔥본격🔥  최애 배틀 ⚔️
+# Celebraiting 🔥본격🔥  최애 배틀 ⚔️
 
 ---
 
