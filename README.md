@@ -1,35 +1,50 @@
-# spring-study
+![](https://velog.velcdn.com/images/amormanet/post/6baabf1f-35e6-4956-85c5-6b43ea110a28/image.webp)
 
+첫번째 개인 웹 프로젝트
 # 🔥본격🔥  최애 배틀 ⚔️
 
- 제가 만든 서비스는 유명인의 업적을 수치화 시켜 랭킹으로 보여주는 서비스입니다.
-당신의 그 잘난 유명인의 업적을 세상에 알리고 포인트를 쌓아 순위권 안에 유지시켜주세요. 
- 지금도 경쟁자가 쫓아오고 있습니다~~ 😰
+---
+
+제가 만든 서비스는 유명인의 업적을 수치화 시켜 랭킹으로 보여주는 서비스입니다.
+당신의 그 잘난 유명인의 업적을 세상에 알리고 포인트를 쌓아 순위권 안에 유지시켜주세요.
+지금도 경쟁자가 쫓아오고 있습니다~~ 😰
 
 Service I made is a service that quantify the achievements of celebrities and shows them as a ranking.
 Let the world know the achievements of your great celebrity, build points, and keep them in the ranking.
 
 
+<br>
+
+
 # 📚 목차
+
+---
 1. [소개](#소개)
 2. [주요기능](#주요기능)
 3. [테이블 설명](#테이블-설명)
-    - [FamousPerson](#famousperson)
-    - [Field](#field)
-    - [FamousPerson_Field](#famousperson_field)
-    - [Achievement](#achievement)
-    - [FamousPerson_Achievement](#famousperson_achievement)
-    - [PointsAwardCriteria](#pointsawardcriteria)
-    - [PointsLog](#Pointslog)
+   - [FamousPerson](#famousperson)
+   - [Field](#field)
+   - [FamousPerson_Field](#famousperson_field)
+   - [Achievement](#achievement)
+   - [FamousPerson_Achievement](#famousperson_achievement)
+   - [PointsAwardCriteria](#pointsawardcriteria)
+   - [PointsLog](#Pointslog)
 
 
-## 🖼️ 소개 
+<br>
 
+## 🖼️ 소개
+
+---
 이 mini  프로젝트는 유명인의 다양한 업적을 체계적으로 관리하고, 업적에 따라 포인트를 부여하며, 이를 통해 유명인의 랭킹을 산출하는 것을 목표로 합니다. 스키마(?) 통해 유명인과 그들의 업적, 분야, 포인트 부여 내역 등을 효율적으로 저장하고 관리할 수 있으며, 그들의 팬들에게 자긍심을 줍니다.
+
+
+<br>
 
 
 ## 💡 주요기능
 
+---
 ### - 유명인의 개인 정보와 그들이 속한 분야 관리
 
 ### -  업적 및 업적에 대한 상세 정보 저장
@@ -40,10 +55,15 @@ Let the world know the achievements of your great celebrity, build points, and k
 
 ### -  유명인의 총 포인트를 기반으로 랭킹 산출
 
-![ERD](./images/KakaoTalk_Photo_2024-10-04-22-17-47.png)
+
+<br>
+
+
 
 ## 👨‍🏫 테이블 설명
 
+---
+![](https://velog.velcdn.com/images/amormanet/post/b465aff5-07cd-4278-aca7-945495049b15/image.png)
 ### 1. FamousPerson
 유명인의 기본 정보와 total point를 저장합니다.
 
@@ -114,7 +134,7 @@ CREATE TABLE PointsAwardCriteria (
 );
 ```
 
-### 7. PointsLog 
+### 7. PointsLog
 포인트를 부여하는 기준과 해당 포인트 값을 정의합니다.
 ```sql
 CREATE TABLE PointsLog (
@@ -131,9 +151,13 @@ CREATE TABLE PointsLog (
 );
 ```
 
+<br>
+
+
 
 ## 💭 만들면서 고려했던 부분
 
+---
 1. 포인트 로그 테이블에서 동일인물 동일업적 동일조건에 조합으로 **중복 수혜를 막고자 유니크 키를 사용하였음**
 2. PointsLog 테이블이 포인트를 직접 저장하지 않고, PointsAwardCriteria의 points를 참조하면서 미래에 포인트 값이 변경된다면 과거에 부여된 포인트에도 영향을 주게 됨
    **로그 테이블에서 포인트 부여시점의 점수를 직접 저장하게 포인트 칼럼을 추가함**
@@ -141,8 +165,12 @@ CREATE TABLE PointsLog (
    추후에 데이터가 많아질경우  성능 저하가 발생할 수 있는데..
    이건 트리거를 사용해서 **total_points를 즉시 업데이트하면 될거 같다**
 
-## 💰나중에 진짜 서비스로 만들어보고싶다.
+<br>
 
-입니!다!!
 
-![ERD](./images/mermaid.png)
+## 💰진짜 웹서비스로 만들어보고 싶습니다
+
+---
+우선은 스프링 공부를 하면서 어떻게 구현하면 좋을지 계속 구상해보겠습니다.
+
+![](https://velog.velcdn.com/images/amormanet/post/1402294b-e785-487d-a392-1e64715ef47b/image.png)
