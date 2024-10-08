@@ -1,5 +1,4 @@
-![](https://velog.velcdn.com/images/amormanet/post/6baabf1f-35e6-4956-85c5-6b43ea110a28/image.webp)
-
+![ERD 다이어그램](./images/Celebraiting.webp)
 첫번째 개인 웹 프로젝트
 # Celebraiting 🔥본격🔥  최애 배틀 ⚔️
 
@@ -23,8 +22,8 @@ Let the world know the achievements of your great celebrity, build points, and k
 2. [주요기능](#주요기능)
 3. [테이블 설명](#테이블-설명)
    - [FamousPerson](#famousperson)
-   - [Field](#field)
-   - [FamousPerson_Field](#famousperson_field)
+   - [TalentArea](#TalentArea)
+   - [FamousPerson_TalentArea](#FamousPerson_TalentArea)
    - [Achievement](#achievement)
    - [FamousPerson_Achievement](#famousperson_achievement)
    - [PointsAwardCriteria](#pointsawardcriteria)
@@ -63,7 +62,7 @@ Let the world know the achievements of your great celebrity, build points, and k
 ## 👨‍🏫 테이블 설명
 
 ---
-![](https://velog.velcdn.com/images/amormanet/post/b465aff5-07cd-4278-aca7-945495049b15/image.png)
+![ERD 다이어그램](./images/erd.png)
 ### 1. FamousPerson
 유명인의 기본 정보와 total point를 저장합니다.
 
@@ -79,24 +78,24 @@ CREATE TABLE FamousPerson (
 );
 ```
 
-### 2. Field
+### 2. TalentArea
 유명인이 활동하는 분야를 저장합니다.
 ```sql
-CREATE TABLE Field (
+CREATE TABLE TalentArea (
    id BIGINT AUTO_INCREMENT PRIMARY KEY,  -- 고유 ID
-   field_name VARCHAR(100)                -- 분야 이름
+   talent_area_name VARCHAR(100)          -- 분야 이름
 );
 ```
 
-### 3. FamousPerson_Field
+### 3. FamousPerson_TalentArea
 유명인과 분야 간의 n:m 관계를 나타냅니다.
 ```sql
-CREATE TABLE FamousPerson_Field (
+CREATE TABLE FamousPerson_TalentArea (
    famous_person_id BIGINT,               -- 유명인사 ID
-   field_id BIGINT,                       -- 분야 ID
-   PRIMARY KEY (famous_person_id, field_id),
+   talent_area_id BIGINT,                 -- 분야 ID
+   PRIMARY KEY (famous_person_id, talent_area_id),
    FOREIGN KEY (famous_person_id) REFERENCES FamousPerson(id),
-   FOREIGN KEY (field_id) REFERENCES Field(id)
+   FOREIGN KEY (talent_area_id) REFERENCES TalentArea(id)
 );
 ```
 
@@ -153,6 +152,178 @@ CREATE TABLE PointsLog (
 
 <br>
 
+## REST API 설계
+
+---
+### 1. FamousPerson API
+
+1. **POST /famous-people**: 새로운 유명인을 등록합니다.
+
+   - Request Body:
+     ```json
+     {
+       "name": "홍길동", 
+       "age": 35,
+       "gender": true,
+       "description": "한국의 전설적인 인물"
+     }
+     ```
+
+2. **GET /famous-people**: 모든 유명인의 목록을 조회합니다.
+
+3. **GET /famous-people/{id}**: 특정 유명인의 정보를 조회합니다.
+
+4. **PUT /famous-people/{id}**: 특정 유명인의 정보를 수정합니다.
+
+   - Request Body:
+     ```json
+     {
+       "name": "홍길동",
+       "age": 36,
+       "description": "사실은 그냥 좀도둑"
+     }
+     ```
+
+5. **DELETE /famous-people/{id}**: 특정 유명인을 삭제합니다.
+
+### 2. TalentArea API
+
+1. **POST /talent-areas**: 새로운 활동 분야를 등록합니다.
+
+   - Request Body:
+     ```json
+     {
+       "talentArea_name": "연기"
+     }
+     ```
+
+2. **GET /talent-areas**: 모든 활동 분야를 조회합니다.
+
+3. **GET /talent-areas/{id}**: 특정 활동 분야를 조회합니다.
+
+4. **PUT /talent-areas/{id}**: 특정 활동 분야의 이름을 수정합니다.
+
+   - Request Body:
+     ```json
+     {
+       "talentArea_name": "수정된 분야 이름"
+     }
+     ```
+
+5. **DELETE /talent-areas/{id}**: 특정 활동 분야를 삭제합니다.
+
+### 3. FamousPerson\_TalentArea API
+
+1. **POST /famous-people/{famousPersonId}/talent-areas/{talentAreaId}**: 특정 유명인에게 특정 활동 분야를 연결합니다.
+
+2. **DELETE /famous-people/{famousPersonId}/talent-areas/{talentAreaId}**: 특정 유명인과 활동 분야 간의 연결을 해제합니다.
+
+### 4. Achievement API
+
+1. **POST /achievements**: 새로운 업적을 등록합니다.
+
+   - Request Body:
+     ```json
+     {
+       "title": "대상 수상",
+       "description": "대한민국 최고 연기자상 수상",
+       "date": "2024-01-01",
+       "tier": "Gold"
+     }
+     ```
+
+2. **GET /achievements**: 모든 업적을 조회합니다.
+
+3. **GET /achievements/{id}**: 특정 업적을 조회합니다.
+
+4. **PUT /achievements/{id}**: 특정 업적의 정보를 수정합니다.
+
+   - Request Body:
+     ```json
+     {
+       "title": "수정된 업적 제목",
+       "description": "수정된 설명"
+     }
+     ```
+
+5. **DELETE /achievements/{id}**: 특정 업적을 삭제합니다.
+
+### 5. FamousPerson\_Achievement API
+
+1. **POST /famous-people/{famousPersonId}/achievements/{achievementId}**: 특정 유명인에게 특정 업적을 연결합니다.
+
+2. **DELETE /famous-people/{famousPersonId}/achievements/{achievementId}**: 특정 유명인과 업적 간의 연결을 해제합니다.
+
+### 6. PointsAwardCriteria API
+
+1. **POST /points-award-criteria**: 새로운 포인트 부여 기준을 등록합니다.
+
+   - Request Body:
+     ```json
+     {
+       "criteria_name": "기술 혁신 기여",
+       "points": 50,
+       "description": "대한민국 기술 혁신에 기여한 경우"
+     }
+     ```
+
+2. **GET /points-award-criteria**: 모든 포인트 부여 기준을 조회합니다.
+
+3. **GET /points-award-criteria/{id}**: 특정 포인트 부여 기준을 조회합니다.
+
+4. **PUT /points-award-criteria/{id}**: 특정 포인트 부여 기준의 정보를 수정합니다.
+
+   - Request Body:
+     ```json
+     {
+       "criteria_name": "수정된 기준 이름",
+       "points": 30
+     }
+     ```
+
+5. **DELETE /points-award-criteria/{id}**: 특정 포인트 부여 기준을 삭제합니다.
+
+### 7. PointsLog API
+
+1. **POST /points-logs**: 새로운 포인트 로그를 생성합니다.
+
+   - Request Body:
+     ```json
+     {
+       "famous_person_id": 1,
+       "achievement_id": 2,
+       "points_award_criteria_id": 3,
+       "points": 50,
+       "date_awarded": "2024-10-08"
+     }
+     ```
+
+2. **GET /points-logs**: 모든 포인트 로그를 조회합니다.
+
+3. **GET /points-logs/{id}**: 특정 포인트 로그를 조회합니다.
+
+4. **GET /famous-people/{famousPersonId}/points**: 특정 유명인의 업적 포인트를 조회합니다.
+
+   - Response Body:
+     ```json
+     {
+       "famous_person_id": 1,
+       "total_points": 150,
+       "points_logs": [
+         {
+           "achievement_id": 2,
+           "points": 50,
+           "date_awarded": "2024-10-08"
+         },
+         {
+           "achievement_id": 3,
+           "points": 100,
+           "date_awarded": "2024-10-05"
+         }
+       ]
+     }
+     ```
+
 
 
 ## 💭 만들면서 고려했던 부분
@@ -164,6 +335,8 @@ CREATE TABLE PointsLog (
 3. 랭킹을 계산할 때마다 PointsLog 테이블에서 실시간으로 총점을 합산하면
    추후에 데이터가 많아질경우  성능 저하가 발생할 수 있는데..
    이건 트리거를 사용해서 **total_points를 즉시 업데이트하면 될거 같다**
+4. 유명인테이블에서 단일 문자열이던 분야를 삭제하고 TalentArea를 추가했습니다 이제부터 유명인이 활동하는 다양한 분야를 테이블로 표현할 수 있습니다.
+5. 
 
 <br>
 
@@ -173,4 +346,4 @@ CREATE TABLE PointsLog (
 ---
 우선은 스프링 공부를 하면서 어떻게 구현하면 좋을지 계속 구상해보겠습니다.
 
-![](https://velog.velcdn.com/images/amormanet/post/1402294b-e785-487d-a392-1e64715ef47b/image.png)
+![머메이드 다이어그램](./images/mermaid.png)
