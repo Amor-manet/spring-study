@@ -5,7 +5,7 @@ import jakarta.persistence.*
 @Entity
 class Introduction(
         content: String,
-        isActive:Boolean
+        isActive: Boolean
 
 ) : BaseEntity() {
 

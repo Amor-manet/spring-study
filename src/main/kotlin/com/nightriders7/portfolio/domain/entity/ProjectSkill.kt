@@ -18,5 +18,4 @@ class ProjectSkill(project: Project, skill: Skill) : BaseEntity() {
     @JoinColumn(name = "Skill_id", nullable = false)
     var skill: Skill = skill
 
-
 }
