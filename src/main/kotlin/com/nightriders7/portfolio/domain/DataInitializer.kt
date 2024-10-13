@@ -140,7 +140,7 @@ class DataInitializer(private val achievementRepository: AchievementRepository,
             isActive = true
 
         )
-        project1.addDetails(
+        project2.addDetails(
             mutableListOf(
                 ProjectDetail(content = "테이블 구성 고도화", url = null, isActive = true),
                 ProjectDetail(content = "알고리즘 개발로 랭킹 시스템 최적화", url = null, isActive = true),
@@ -156,6 +156,8 @@ class DataInitializer(private val achievementRepository: AchievementRepository,
             )
 
         )
+        projectRepository.saveAll(mutableListOf(project1,project2))
+
 
 
 

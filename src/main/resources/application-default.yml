@@ -4,7 +4,7 @@ spring:
     open-in-view: false
     show-sql: true # show sql on log
     hibernate: #JPA create table
-      ddl-auto: create #crete use only test
+      ddl-auto: create #crete use only test 테이블 생성
     properties:
       hibernate:
         format_sql: false #sql log looks pretty

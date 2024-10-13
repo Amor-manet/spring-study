@@ -39,13 +39,14 @@ class Project(
         fetch = FetchType.LAZY)
     //cascade = [CascadeType.ALL]: project가 저장, 삭제될 때 연관된 세부 정보도 함께 저장, 삭제되도록 합니다.
     //fetch = FetchType.LAZY: 연관된 데이터는 필요할 때만 가져오도록 설정해 메모리와 성능을 관리합니다.
-
     //@JoinColumn(name = "project_id"): 외래 키로 사용될 컬럼을 지정하며, projectDetail 테이블의 project_id와 매핑합니다.
     @JoinColumn(name = "project_id")
     var details: MutableList<ProjectDetail> = mutableListOf()
     // detail 필드: MutableList<ExperienseDetail> 타입으로, 경력에 대한 여러 세부 정보들을 포함합니다.
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project",
+        fetch = FetchType.LAZY,
+        cascade = [CascadeType.PERSIST])
     var skills : MutableList<ProjectSkill> = mutableListOf()
 
     //getEndYearMonth() 메서드는 종료 연도와 월을 반환합니다.

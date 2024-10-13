@@ -157,172 +157,66 @@ CREATE TABLE PointsLog (
 ---
 ### 1. FamousPerson API
 
-1. **POST /famous-people**: 새로운 유명인을 등록합니다.
-
-   - Request Body:
-     ```json
-     {
-       "name": "홍길동", 
-       "age": 35,
-       "gender": true,
-       "description": "한국의 전설적인 인물"
-     }
-     ```
-
-2. **GET /famous-people**: 모든 유명인의 목록을 조회합니다.
-
-3. **GET /famous-people/{id}**: 특정 유명인의 정보를 조회합니다.
-
-4. **PUT /famous-people/{id}**: 특정 유명인의 정보를 수정합니다.
-
-   - Request Body:
-     ```json
-     {
-       "name": "홍길동",
-       "age": 36,
-       "description": "사실은 그냥 좀도둑"
-     }
-     ```
-
-5. **DELETE /famous-people/{id}**: 특정 유명인을 삭제합니다.
-
+| **Method** | **Endpoint**              | **Request Body**                                                                                   | **Response Body**                                                                                       | **Description**                          |
+|------------|---------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------|
+| POST       | /famous-people             | `{ "name": "홍길동", "age": 35, "gender": true, "description": "한국의 전설적인 인물" }`              | `{ "id": 1, "name": "홍길동", "age": 35, "gender": true, "description": "한국의 전설적인 인물" }`         | 새로운 유명인을 등록합니다.              |
+| GET        | /famous-people             | 없음                                                                                               | `[ { "id": 1, "name": "홍길동", "age": 35, "gender": true, "description": "한국의 전설적인 인물" } ]`    | 모든 유명인의 목록을 조회합니다.         |
+| GET        | /famous-people/{id}        | 없음                                                                                               | `{ "id": 1, "name": "홍길동", "age": 35, "gender": true, "description": "한국의 전설적인 인물" }`         | 특정 유명인의 정보를 조회합니다.         |
+| PUT        | /famous-people/{id}        | `{ "name": "홍길동", "age": 36, "description": "사실은 그냥 좀도둑" }`                               | `{ "id": 1, "name": "홍길동", "age": 36, "gender": true, "description": "사실은 그냥 좀도둑" }`            | 특정 유명인의 정보를 수정합니다.         |
+| DELETE     | /famous-people/{id}        | 없음                                                                                               | `{ "message": "Famous person deleted successfully" }`                                                    | 특정 유명인을 삭제합니다.                |
 ### 2. TalentArea API
 
-1. **POST /talent-areas**: 새로운 활동 분야를 등록합니다.
+| **Method** | **Endpoint**              | **Request Body**                                                | **Response Body**                                | **Description**                          |
+|------------|---------------------------|-----------------------------------------------------------------|-------------------------------------------------|------------------------------------------|
+| POST       | /talent-areas             | `{ "talentArea_name": "연기" }`                                  | `{ "id": 1, "talentArea_name": "연기" }`         | 새로운 활동 분야를 등록합니다.           |
+| GET        | /talent-areas             | 없음                                                            | `[ { "id": 1, "talentArea_name": "연기" } ]`     | 모든 활동 분야를 조회합니다.             |
+| GET        | /talent-areas/{id}        | 없음                                                            | `{ "id": 1, "talentArea_name": "연기" }`         | 특정 활동 분야를 조회합니다.             |
+| PUT        | /talent-areas/{id}        | `{ "talentArea_name": "수정된 분야 이름" }`                      | `{ "id": 1, "talentArea_name": "수정된 분야 이름" }`| 특정 활동 분야의 이름을 수정합니다.      |
+| DELETE     | /talent-areas/{id}        | 없음                                                            | `{ "message": "Talent area deleted successfully" }` | 특정 활동 분야를 삭제합니다.             |
 
-   - Request Body:
-     ```json
-     {
-       "talentArea_name": "연기"
-     }
-     ```
+### 3. FamousPerson_TalentArea API
 
-2. **GET /talent-areas**: 모든 활동 분야를 조회합니다.
-
-3. **GET /talent-areas/{id}**: 특정 활동 분야를 조회합니다.
-
-4. **PUT /talent-areas/{id}**: 특정 활동 분야의 이름을 수정합니다.
-
-   - Request Body:
-     ```json
-     {
-       "talentArea_name": "수정된 분야 이름"
-     }
-     ```
-
-5. **DELETE /talent-areas/{id}**: 특정 활동 분야를 삭제합니다.
-
-### 3. FamousPerson\_TalentArea API
-
-1. **POST /famous-people/{famousPersonId}/talent-areas/{talentAreaId}**: 특정 유명인에게 특정 활동 분야를 연결합니다.
-
-2. **DELETE /famous-people/{famousPersonId}/talent-areas/{talentAreaId}**: 특정 유명인과 활동 분야 간의 연결을 해제합니다.
+| **Method** | **Endpoint**                                           | **Request Body** | **Response Body**                              | **Description**                                    |
+|------------|--------------------------------------------------------|------------------|------------------------------------------------|----------------------------------------------------|
+| POST       | /famous-people/{famousPersonId}/talent-areas/{talentAreaId} | 없음             | `{ "message": "Talent area assigned to famous person" }` | 특정 유명인에게 특정 활동 분야를 연결합니다.         |
+| DELETE     | /famous-people/{famousPersonId}/talent-areas/{talentAreaId} | 없음             | `{ "message": "Talent area removed from famous person" }` | 특정 유명인과 활동 분야 간의 연결을 해제합니다.      |
 
 ### 4. Achievement API
 
-1. **POST /achievements**: 새로운 업적을 등록합니다.
+| **Method** | **Endpoint**              | **Request Body**                                                                                    | **Response Body**                                                                                       | **Description**                          |
+|------------|---------------------------|-----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|------------------------------------------|
+| POST       | /achievements             | `{ "title": "대상 수상", "description": "대한민국 최고 연기자상 수상", "date": "2024-01-01", "tier": "Gold" }` | `{ "id": 1, "title": "대상 수상", "description": "대한민국 최고 연기자상 수상", "date": "2024-01-01", "tier": "Gold" }` | 새로운 업적을 등록합니다.                |
+| GET        | /achievements             | 없음                                                                                                | `[ { "id": 1, "title": "대상 수상", "description": "대한민국 최고 연기자상 수상", "date": "2024-01-01", "tier": "Gold" } ]` | 모든 업적을 조회합니다.                  |
+| GET        | /achievements/{id}        | 없음                                                                                                | `{ "id": 1, "title": "대상 수상", "description": "대한민국 최고 연기자상 수상", "date": "2024-01-01", "tier": "Gold" }` | 특정 업적을 조회합니다.                  |
+| PUT        | /achievements/{id}        | `{ "title": "수정된 업적 제목", "description": "수정된 설명" }`                                       | `{ "id": 1, "title": "수정된 업적 제목", "description": "수정된 설명", "date": "2024-01-01", "tier": "Gold" }` | 특정 업적의 정보를 수정합니다.           |
+| DELETE     | /achievements/{id}        | 없음                                                                                                | `{ "message": "Achievement deleted successfully" }`                                                      | 특정 업적을 삭제합니다.                  |
 
-   - Request Body:
-     ```json
-     {
-       "title": "대상 수상",
-       "description": "대한민국 최고 연기자상 수상",
-       "date": "2024-01-01",
-       "tier": "Gold"
-     }
-     ```
+### 5. FamousPerson_Achievement API
 
-2. **GET /achievements**: 모든 업적을 조회합니다.
-
-3. **GET /achievements/{id}**: 특정 업적을 조회합니다.
-
-4. **PUT /achievements/{id}**: 특정 업적의 정보를 수정합니다.
-
-   - Request Body:
-     ```json
-     {
-       "title": "수정된 업적 제목",
-       "description": "수정된 설명"
-     }
-     ```
-
-5. **DELETE /achievements/{id}**: 특정 업적을 삭제합니다.
-
-### 5. FamousPerson\_Achievement API
-
-1. **POST /famous-people/{famousPersonId}/achievements/{achievementId}**: 특정 유명인에게 특정 업적을 연결합니다.
-
-2. **DELETE /famous-people/{famousPersonId}/achievements/{achievementId}**: 특정 유명인과 업적 간의 연결을 해제합니다.
+| **Method** | **Endpoint**                                             | **Request Body** | **Response Body**                              | **Description**                                    |
+|------------|----------------------------------------------------------|------------------|------------------------------------------------|----------------------------------------------------|
+| POST       | /famous-people/{famousPersonId}/achievements/{achievementId} | 없음             | `{ "message": "Achievement assigned to famous person" }` | 특정 유명인에게 특정 업적을 연결합니다.              |
+| DELETE     | /famous-people/{famousPersonId}/achievements/{achievementId} | 없음             | `{ "message": "Achievement removed from famous person" }` | 특정 유명인과 업적 간의 연결을 해제합니다.           |
 
 ### 6. PointsAwardCriteria API
 
-1. **POST /points-award-criteria**: 새로운 포인트 부여 기준을 등록합니다.
-
-   - Request Body:
-     ```json
-     {
-       "criteria_name": "기술 혁신 기여",
-       "points": 50,
-       "description": "대한민국 기술 혁신에 기여한 경우"
-     }
-     ```
-
-2. **GET /points-award-criteria**: 모든 포인트 부여 기준을 조회합니다.
-
-3. **GET /points-award-criteria/{id}**: 특정 포인트 부여 기준을 조회합니다.
-
-4. **PUT /points-award-criteria/{id}**: 특정 포인트 부여 기준의 정보를 수정합니다.
-
-   - Request Body:
-     ```json
-     {
-       "criteria_name": "수정된 기준 이름",
-       "points": 30
-     }
-     ```
-
-5. **DELETE /points-award-criteria/{id}**: 특정 포인트 부여 기준을 삭제합니다.
+| **Method** | **Endpoint**              | **Request Body**                                                                         | **Response Body**                                                                         | **Description**                          |
+|------------|---------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|------------------------------------------|
+| POST       | /points-award-criteria     | `{ "criteria_name": "기술 혁신 기여", "points": 50, "description": "대한민국 기술 혁신에 기여한 경우" }` | `{ "id": 1, "criteria_name": "기술 혁신 기여", "points": 50, "description": "대한민국 기술 혁신에 기여한 경우" }` | 새로운 포인트 부여 기준을 등록합니다.     |
+| GET        | /points-award-criteria     | 없음                                                                                     | `[ { "id": 1, "criteria_name": "기술 혁신 기여", "points": 50, "description": "기술 혁신" } ]` | 모든 포인트 부여 기준을 조회합니다.       |
+| GET        | /points-award-criteria/{id}| 없음                                                                                     | `{ "id": 1, "criteria_name": "기술 혁신 기여", "points": 50, "description": "기술 혁신" }`  | 특정 포인트 부여 기준을 조회합니다.       |
+| PUT        | /points-award-criteria/{id}| `{ "criteria_name": "수정된 기준 이름", "points": 30 }`                                   | `{ "id": 1, "criteria_name": "수정된 기준 이름", "points": 30 }`                            | 특정 포인트 부여 기준의 정보를 수정합니다.|
+| DELETE     | /points-award-criteria/{id}| 없음                                                                                     | `{ "message": "Points award criteria deleted successfully" }`                              | 특정 포인트 부여 기준을 삭제합니다.       |
 
 ### 7. PointsLog API
 
-1. **POST /points-logs**: 새로운 포인트 로그를 생성합니다.
-
-   - Request Body:
-     ```json
-     {
-       "famous_person_id": 1,
-       "achievement_id": 2,
-       "points_award_criteria_id": 3,
-       "points": 50,
-       "date_awarded": "2024-10-08"
-     }
-     ```
-
-2. **GET /points-logs**: 모든 포인트 로그를 조회합니다.
-
-3. **GET /points-logs/{id}**: 특정 포인트 로그를 조회합니다.
-
-4. **GET /famous-people/{famousPersonId}/points**: 특정 유명인의 업적 포인트를 조회합니다.
-
-   - Response Body:
-     ```json
-     {
-       "famous_person_id": 1,
-       "total_points": 150,
-       "points_logs": [
-         {
-           "achievement_id": 2,
-           "points": 50,
-           "date_awarded": "2024-10-08"
-         },
-         {
-           "achievement_id": 3,
-           "points": 100,
-           "date_awarded": "2024-10-05"
-         }
-       ]
-     }
-     ```
+| **Method** | **Endpoint**              | **Request Body**                                                                                               | **Response Body**                                                                                                       | **Description**                          |
+|------------|---------------------------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
+| POST       | /points-logs              | `{ "famous_person_id": 1, "achievement_id": 2, "points_award_criteria_id": 3, "points": 50, "date_awarded": "2024-10-08" }` | `{ "id": 1, "famous_person_id": 1, "achievement_id": 2, "points_award_criteria_id": 3, "points": 50, "date_awarded": "2024-10-08" }` | 새로운 포인트 로그를 생성합니다.         |
+| GET        | /points-logs              | 없음                                                                                                           | `[ { "id": 1, "famous_person_id": 1, "achievement_id": 2, "points_award_criteria_id": 3, "points": 50, "date_awarded": "2024-10-08" } ]` | 모든 포인트 로그를 조회합니다.           |
+| GET        | /points-logs/{id}         | 없음                                                                                                           | `{ "id": 1, "famous_person_id": 1, "achievement_id": 2, "points_award_criteria_id": 3, "points": 50, "date_awarded": "2024-10-08" }`  | 특정 포인트 로그를 조회합니다.           |
+| GET        | /famous-people/{famousPersonId}/points | 없음                                                                                                           | `{ "famous_person_id": 1, "total_points": 150, "points_logs": [ { "achievement_id": 2, "points": 50, "date_awarded": "2024-10-08" }, { "achievement_id": 3, "points": 100, "date_awarded": "2024-10-05" } ] }` | 특정 유명인의 업적 포인트를 조회합니다.   |
+| GET        | /famous-people/{famousPersonId}/points | 없음                                                                                                           | `{ "famous_person_id": 1, "total_points": 150, "points_logs": [ { "achievement_id": 2, "points": 50, "date_awarded": "2024-10-08" }, { "achievement_id": 3, "points": 100, "date_awarded": "2024-10-05" } ] }` | 특정 유명인의 업적 포인트 및 포인트 로그를 조회합니다. |
 
 
 
